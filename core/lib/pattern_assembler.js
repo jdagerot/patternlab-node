@@ -285,6 +285,7 @@ var pattern_assembler = function () {
           subTypePattern.flatPatternPath = subTypePattern.flatPatternPath + '-' + subTypePattern.fileName;
           subTypePattern.isPattern = false;
           subTypePattern.engine = null;
+          subTypePattern.friendlyName = "FN:" + i18n(patternlab.config, subTypePattern.name);
 
           addSubtypePattern(subTypePattern, patternlab);
           return subTypePattern;

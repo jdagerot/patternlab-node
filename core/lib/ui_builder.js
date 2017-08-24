@@ -120,11 +120,13 @@ var ui_builder = function () {
       return docPattern;
     }
 
+    var fName = isSubtypePattern ? pattern.patternSubGroup : pattern.patternGroup;
     //if not, create one now
     docPattern = new Pattern.createEmpty(
       {
         name: pattern.flatPatternPath,
         patternName:   isSubtypePattern ? pattern.patternSubGroup : pattern.patternGroup,
+        friendlyName : i18n(patternlab.config, fName),
         patternDesc: '',
         patternPartial: 'viewall-' + pattern.patternGroup + (isSubtypePattern ? '-' + pattern.patternSubGroup : ''),
         patternSectionSubtype : isSubtypePattern,
@@ -237,6 +239,7 @@ var ui_builder = function () {
     return {
       patternPartial: pattern.patternPartial,
       patternName: pattern.patternName,
+      friendlyName : "My friendlyname", //i18n(patternlab.config, pattern.patternName),
       patternState: pattern.patternState,
       patternSrcPath: encodeURI(pattern.subdir + '/' + pattern.fileName),
       patternPath: patternPath,
