@@ -122,13 +122,20 @@ var ui_builder = function () {
 
     var fName = isSubtypePattern ? pattern.patternSubGroup : pattern.patternGroup;
     //if not, create one now
+    var markdownTitle = "No MD-title";
+    if(pattern.allMarkdown) {
+      markdownTitle = "md-title " + pattern.allMarkdown.title;
+    }
+    var friendlyName = i18n(patternlab.config, fName);
     docPattern = new Pattern.createEmpty(
       {
         name: pattern.flatPatternPath,
         patternName:   isSubtypePattern ? pattern.patternSubGroup : pattern.patternGroup,
-        friendlyName : i18n(patternlab.config, fName),
+        friendlyName : friendlyName,
+        markdownTitle : "MD-title" + markdownTitle,
         patternDesc: '',
         patternPartial: 'viewall-' + pattern.patternGroup + (isSubtypePattern ? '-' + pattern.patternSubGroup : ''),
+        friendlyPath : 'viewall-' + pattern.patternGroup + (isSubtypePattern ? '-' + friendlyName : ''),
         patternSectionSubtype : isSubtypePattern,
         patternLink: pattern.flatPatternPath + path.sep + 'index.html',
         isPattern: false,
@@ -150,12 +157,16 @@ var ui_builder = function () {
      */
   function addPatternType(patternlab, pattern) {
     var fName = i18n(patternlab.config, pattern.patternGroup);
-
+    var markdownTitle = "No MD-title";
+    if(pattern.allMarkdown) {
+      markdownTitle = "md-title " + pattern.allMarkdown.title;
+    }
     patternlab.patternTypes.push(
       {
         patternTypeLC: pattern.patternGroup.toLowerCase(),
         patternTypeUC: pattern.patternGroup.charAt(0).toUpperCase() + pattern.patternGroup.slice(1),
         patternTypeFN: fName,
+        markdownTitle: markdownTitle,
         patternType: pattern.patternType,
         patternTypeDash: pattern.patternGroup, //todo verify
         patternTypeItems: []
@@ -239,7 +250,7 @@ var ui_builder = function () {
     return {
       patternPartial: pattern.patternPartial,
       patternName: pattern.patternName,
-      friendlyName : "My friendlyname", //i18n(patternlab.config, pattern.patternName),
+      friendlyName : "My friendlyName", //i18n(patternlab.config, pattern.patternName),
       patternState: pattern.patternState,
       patternSrcPath: encodeURI(pattern.subdir + '/' + pattern.fileName),
       patternPath: patternPath,

@@ -14,6 +14,7 @@ var path = require('path'),
   smh = require('./style_modifier_hunter'),
   ph = require('./parameter_hunter'),
   jsonCopy = require('./json_copy'),
+  i18n = require('./i18n.js'),
   ch = require('./changes_hunter');
 
 const markdown_parser = new mp();
@@ -285,7 +286,7 @@ var pattern_assembler = function () {
           subTypePattern.flatPatternPath = subTypePattern.flatPatternPath + '-' + subTypePattern.fileName;
           subTypePattern.isPattern = false;
           subTypePattern.engine = null;
-          subTypePattern.friendlyName = "FN:" + i18n(patternlab.config, subTypePattern.name);
+          subTypePattern.friendlyName = subTypeMarkdown.title || subTypePattern.name;
 
           addSubtypePattern(subTypePattern, patternlab);
           return subTypePattern;
