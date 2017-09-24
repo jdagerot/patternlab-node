@@ -359,14 +359,24 @@ var ui_builder = function () {
 
       //use old alphabetical ordering if we have nothing else to use
       //pattern.order will be Number.MAX_SAFE_INTEGER if never defined by markdown, or markdown parsing fails
+
       if (aOrder === Number.MAX_SAFE_INTEGER && bOrder === Number.MAX_SAFE_INTEGER) {
 
-        if (a.name > b.name) {
+        console.log("name=" + a.name + " pattername=" + b.patternName);
+
+        if (a.patternName > b.patternName) {
           return 1;
         }
-        if (a.name < b.name) {
+        if (a.patternName < b.patternName) {
           return -1;
         }
+
+        // if (a.name > b.name) {
+        //   return 1;
+        // }
+        // if (a.name < b.name) {
+        //   return -1;
+        // }
       }
 
       //if we get this far, we can sort safely
